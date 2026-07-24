@@ -27,8 +27,8 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const port = process.env.PORT ?? 3000;
-  await app.listen(port);
-  console.log(`🚀 Aplikasi E-Commerce berjalan pada: http://localhost:${port}`);
-  console.log(`📚 Dokumentasi Swagger API tersedia di: http://localhost:${port}/api`);
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 Aplikasi E-Commerce berjalan pada: http://0.0.0.0:${port}`);
+  console.log(`📚 Dokumentasi Swagger API tersedia di: http://0.0.0.0:${port}/api`);
 }
 bootstrap();
