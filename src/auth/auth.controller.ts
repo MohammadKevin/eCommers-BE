@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Public } from './decorators/public.decorator';
 import { LoginDto } from './dto/login.dto';
+import { RegisterAdminDto } from './dto/register-admin.dto';
 import { RegisterDto } from './dto/register.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
@@ -17,6 +18,13 @@ export class AuthController {
   @ApiOperation({ summary: 'Registrasi pengguna baru' })
   async register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
+  }
+
+  @Public()
+  @Post('register-admin')
+  @ApiOperation({ summary: 'Registrasi khusus akun role penting (SUPER_ADMIN, OPERATIONS_CS, FINANCE_ADMIN, MARKETING_ADMIN)' })
+  async registerAdmin(@Body() registerAdminDto: RegisterAdminDto) {
+    return this.authService.registerAdmin(registerAdminDto);
   }
 
   @Public()
