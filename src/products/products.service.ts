@@ -172,21 +172,29 @@ export class ProductsService {
   }
 
   async clearAllProducts() {
-    await this.prisma.cartItem.deleteMany({});
-    await this.prisma.orderItem.deleteMany({});
-    await this.prisma.wishlist.deleteMany({});
-    await this.prisma.review.deleteMany({});
-    await this.prisma.productImage.deleteMany({});
-    await this.prisma.productVariant.deleteMany({});
-    await this.prisma.product.deleteMany({});
+    try {
+      await this.prisma.cartItem.deleteMany({});
+      await this.prisma.orderItem.deleteMany({});
+      await this.prisma.wishlist.deleteMany({});
+      await this.prisma.review.deleteMany({});
+      await this.prisma.productImage.deleteMany({});
+      await this.prisma.productVariant.deleteMany({});
+      await this.prisma.product.deleteMany({});
+    } catch (err) {
+      console.error('Error clearing products:', err);
+    }
     return { message: 'Semua produk dummy di database telah dibersihkan.' };
   }
 
   async deleteProduct(productId: string) {
-    await this.prisma.cartItem.deleteMany({ where: { variant: { productId } } });
-    await this.prisma.productImage.deleteMany({ where: { productId } });
-    await this.prisma.productVariant.deleteMany({ where: { productId } });
-    await this.prisma.product.delete({ where: { id: productId } });
+    try {
+      await this.prisma.cartItem.deleteMany({ where: { variant: { productId } } });
+      await this.prisma.productImage.deleteMany({ where: { productId } });
+      await this.prisma.productVariant.deleteMany({ where: { productId } });
+      await this.prisma.product.delete({ where: { id: productId } });
+    } catch (err) {
+      console.error('Error deleting product:', err);
+    }
     return { message: 'Produk berhasil dihapus.' };
   }
 }
