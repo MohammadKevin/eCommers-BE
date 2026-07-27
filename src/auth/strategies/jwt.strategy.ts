@@ -35,6 +35,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         tier: true,
         isAffiliate: true,
         avatarUrl: true,
+        stores: {
+          include: {
+            store: true,
+          },
+        },
       },
     });
 
@@ -42,6 +47,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Sesi tidak valid atau pengguna tidak ditemukan');
     }
 
-    return user;
+    const ownedStores = (user.stores || []).map((sm) => ({
+      ...sm.store,
+      userRole: sm.role,
+    }));
+
+    return {
+      ...user,
+      ownedStores,
+    };
   }
 }

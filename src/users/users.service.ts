@@ -22,6 +22,11 @@ export class UsersService {
         isAffiliate: true,
         createdAt: true,
         addresses: true,
+        stores: {
+          include: {
+            store: true,
+          },
+        },
       },
     });
 
@@ -29,7 +34,15 @@ export class UsersService {
       throw new NotFoundException('Pengguna tidak ditemukan');
     }
 
-    return user;
+    const ownedStores = (user.stores || []).map((sm) => ({
+      ...sm.store,
+      userRole: sm.role,
+    }));
+
+    return {
+      ...user,
+      ownedStores,
+    };
   }
 
   async updateProfile(userId: string, updateProfileDto: UpdateProfileDto) {
