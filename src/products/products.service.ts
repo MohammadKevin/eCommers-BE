@@ -35,27 +35,21 @@ export class ProductsService {
 
   // Product Management
   async createProduct(userId: string, dto: CreateProductDto) {
-    // 1. Resolve & Auto-Assign Store Access
+    // 1. Resolve & Check Store Access
     let storeId = dto.storeId;
     let store = await this.prisma.store.findUnique({ where: { id: storeId } });
 
     if (!store) {
-      const firstStore = await this.prisma.store.findFirst();
-      if (firstStore) {
-        store = firstStore;
-        storeId = firstStore.id;
-      } else {
-        store = await this.prisma.store.create({
-          data: {
-            name: 'Aetheria Tech Flagship',
-            slug: 'aetheria-tech-official',
-            description: 'Toko Resmi Gadget & Laptop Premium Original.',
-            city: 'Jakarta Selatan',
-            province: 'DKI Jakarta',
-            isOfficial: true,
-          },
-        });
+      // Find user's actual store from database
+      const userMember = await this.prisma.storeMember.findFirst({
+        where: { userId },
+        include: { store: true },
+      });
+      if (userMember?.store) {
+        store = userMember.store;
         storeId = store.id;
+      } else {
+        throw new NotFoundException('Toko tidak ditemukan. Silakan buat toko terlebih dahulu.');
       }
     }
 
