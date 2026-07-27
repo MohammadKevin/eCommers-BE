@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Public } from '../auth/decorators/public.decorator';
@@ -36,6 +36,13 @@ export class ProductsController {
   }
 
   @Public()
+  @Delete('clear-all')
+  @ApiOperation({ summary: 'Hapus semua produk dummy di database' })
+  clearAllProducts() {
+    return this.productsService.clearAllProducts();
+  }
+
+  @Public()
   @Get(':slug')
   @ApiOperation({ summary: 'Detail produk lengkap berdasarkan slug' })
   getProductBySlug(@Param('slug') slug: string) {
@@ -48,5 +55,12 @@ export class ProductsController {
   @ApiOperation({ summary: 'Tambah produk baru berserta varian & foto' })
   createProduct(@CurrentUser('id') userId: string, @Body() dto: CreateProductDto) {
     return this.productsService.createProduct(userId, dto);
+  }
+
+  @Public()
+  @Delete(':id')
+  @ApiOperation({ summary: 'Hapus produk berdasarkan ID' })
+  deleteProduct(@Param('id') id: string) {
+    return this.productsService.deleteProduct(id);
   }
 }

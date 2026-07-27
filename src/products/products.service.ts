@@ -170,4 +170,23 @@ export class ProductsService {
 
     return product;
   }
+
+  async clearAllProducts() {
+    await this.prisma.cartItem.deleteMany({});
+    await this.prisma.orderItem.deleteMany({});
+    await this.prisma.wishlistItem.deleteMany({});
+    await this.prisma.review.deleteMany({});
+    await this.prisma.productImage.deleteMany({});
+    await this.prisma.productVariant.deleteMany({});
+    await this.prisma.product.deleteMany({});
+    return { message: 'Semua produk dummy di database telah dibersihkan.' };
+  }
+
+  async deleteProduct(productId: string) {
+    await this.prisma.cartItem.deleteMany({ where: { variant: { productId } } });
+    await this.prisma.productImage.deleteMany({ where: { productId } });
+    await this.prisma.productVariant.deleteMany({ where: { productId } });
+    await this.prisma.product.delete({ where: { id: productId } });
+    return { message: 'Produk berhasil dihapus.' };
+  }
 }
