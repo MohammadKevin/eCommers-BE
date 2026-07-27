@@ -174,7 +174,7 @@ export class ProductsService {
   async clearAllProducts() {
     await this.prisma.cartItem.deleteMany({});
     await this.prisma.orderItem.deleteMany({});
-    await this.prisma.wishlistItem.deleteMany({});
+    await this.prisma.wishlist.deleteMany({});
     await this.prisma.review.deleteMany({});
     await this.prisma.productImage.deleteMany({});
     await this.prisma.productVariant.deleteMany({});
