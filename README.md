@@ -12,19 +12,19 @@
 
 ---
 
-## 📌 Overview
+## Overview
 High-throughput backend service providing product management, order processing, customer cart sync, and admin dashboard metrics.
 
 ---
 
-## ✨ Key Features
+## Key Features
 - Product catalog with variants, pricing tiers, and stock management
 - Order workflow with status state transitions
 - JWT authorization and Prisma ORM data modeling
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Framework**: NestJS
 - **Language**: TypeScript
 - **ORM**: Prisma ORM
@@ -32,7 +32,7 @@ High-throughput backend service providing product management, order processing, 
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```text
 eCommers-BE/
 ├── src/
@@ -44,7 +44,7 @@ eCommers-BE/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 Make sure you have the required runtimes and tools installed on your machine:
@@ -61,7 +61,7 @@ npm run start:dev
 
 ---
 
-## 👤 Author
+## Author
 **Mohammad Kevin Arif Rudianto**
 - **GitHub:** [@MohammadKevin](https://github.com/MohammadKevin)
 - **Portfolio:** [portfolio-mohammadkevin.vercel.app](https://portfolio-mohammadkevin.vercel.app)
@@ -70,9 +70,9 @@ npm run start:dev
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 <div align="center">
-⭐️ If you found this repository useful, please consider giving it a star!
+If you found this repository useful, please consider giving it a star!
 </div>
