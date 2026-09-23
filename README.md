@@ -18,9 +18,9 @@ High-throughput backend service providing product management, order processing, 
 ---
 
 ## ✨ Key Features
-- ⚡ **Product catalog with variants, pricing tiers, and stock management**: Product catalog with variants, pricing tiers, and stock management
-- ⚡ **Order workflow with status state transitions**: Order workflow with status state transitions
-- ⚡ **JWT authorization and Prisma ORM data modeling**: JWT authorization and Prisma ORM data modeling
+- Product catalog with variants, pricing tiers, and stock management
+- Order workflow with status state transitions
+- JWT authorization and Prisma ORM data modeling
 
 ---
 
